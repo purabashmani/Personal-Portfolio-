@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn/ui design tokens — mapped to the light purple/red palette */
+@layer base {
+  :root {
+    --background: 276 40% 97%;
+    --foreground: 283 44% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 283 44% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 283 44% 11%;
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 285 40% 94%;
+    --secondary-foreground: 283 44% 11%;
+    --muted: 285 40% 94%;
+    --muted-foreground: 275 10% 45%;
+    --accent: 285 40% 94%;
+    --accent-foreground: 283 44% 11%;
+    --destructive: 347 77% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 285 35% 91%;
+    --input: 285 35% 91%;
+    --ring: 271 81% 56%;
+    --radius: 0.75rem;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+/* Lenis smooth-scroll (weighted momentum scrolling) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+  background-color: #f8f3fc;
+  background-image:
+    radial-gradient(60% 50% at 15% 0%, rgba(147, 51, 234, 0.12), transparent 60%),
+    radial-gradient(55% 45% at 90% 12%, rgba(219, 39, 119, 0.1), transparent 60%),
+    radial-gradient(70% 55% at 50% 108%, rgba(225, 29, 72, 0.08), transparent 65%);
+  background-attachment: fixed;
+  color: #221029;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1e8f6;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#9333ea, #e11d48);
+  border-radius: 999px;
+}
+::selection {
+  background: rgba(219, 39, 119, 0.2);
+  color: #6d28d9;
+}
+
+/* Display helper */
+.display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+/* Vibrant purple -> magenta -> red gradient text */
+.gradient-brand {
+  background-image: linear-gradient(
+    100deg,
+    #7c3aed 0%,
+    #c026d3 48%,
+    #e11d48 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-warm {
+  background-image: linear-gradient(100deg, #d97706, #f43f5e 60%, #e11d48);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Eyebrow / kicker */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #9333ea;
+}
+
+/* Rules */
+.rule-brand {
+  height: 3px;
+  width: 56px;
+  border-radius: 999px;
+  background-image: linear-gradient(90deg, #9333ea, #e11d48);
+}
+.hairline {
+  height: 1px;
+  background: #ece0f0;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border: 1px solid #ece0f0;
+  border-radius: 1.25rem;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(147, 51, 234, 0.45);
+  box-shadow: 0 26px 60px -26px rgba(147, 51, 234, 0.4);
+}
+
+/* Buttons */
+.btn-brand {
+  background-image: linear-gradient(100deg, #7c3aed, #c026d3 52%, #e11d48);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+}
+.btn-brand:hover {
+  box-shadow: 0 16px 40px -12px rgba(192, 38, 211, 0.55);
+}
+.btn-brand:active {
+  transform: translateY(1px);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(34, 16, 41, 0.22);
+  color: #221029;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.btn-ghost:hover {
+  border-color: #9333ea;
+  color: #9333ea;
+  background: rgba(147, 51, 234, 0.07);
+}
+
+/* Chips */
+.chip {
+  border: 1px solid #e6d8ee;
+  border-radius: 999px;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.chip:hover {
+  border-color: #9333ea;
+  color: #9333ea;
+  background: rgba(147, 51, 234, 0.06);
+}
+
+/* Fields */
+.field {
+  background: #fdfbff;
+  border: 1px solid #e6d8ee;
+  border-radius: 0.85rem;
+  color: #221029;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: #9333ea;
+  box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.14);
+}
+.field::placeholder {
+  color: #a695b0;
+}
+
+/* Animated link underline */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  border-radius: 999px;
+  background-image: linear-gradient(90deg, #9333ea, #e11d48);
+  transition: width 0.3s ease;
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Decorative blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Mask reveal (used by MaskReveal component) */
+.mask-clip {
+  overflow: hidden;
+  display: block;
+}
+
+/* Reduced motion: halt perpetual CSS loops and instant-scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-blob-float {
+    animation: none !important;
+  }
+}
