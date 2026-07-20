@@ -1,9 +1,16 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import MaskReveal from "./MaskReveal";
+import MarketBackdrop from "./MarketBackdrop";
 import { Button } from "@/components/ui/button";
 
 const socials = [
@@ -15,6 +22,7 @@ const socials = [
   { icon: Mail, href: "mailto:ashmaniwala.p@northeastern.edu", label: "Email" },
 ];
 
+const ROLES = ["Entrepreneur", "Aspiring VC", "PE Investor", "Founder"];
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
@@ -25,8 +33,6 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Rockstar-style parallax: content drifts up + fades, blobs move at their own
-  // pace. Disabled under prefers-reduced-motion (ranges collapse to 0).
   const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 140]);
   const contentOpacity = useTransform(
     scrollYProgress,
@@ -35,25 +41,33 @@ export default function Hero() {
   );
   const blob1Y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -220]);
   const blob2Y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 180]);
-  const blob3Y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -120]);
+
+  // rotating role words
+  const [roleIndex, setRoleIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(
+      () => setRoleIndex((p) => (p + 1) % ROLES.length),
+      2200
+    );
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center overflow-hidden bg-canvas"
     >
-      {/* Vibrant parallax blobs */}
+      {/* Finance / markets motif */}
+      <MarketBackdrop />
+
+      {/* Ambient parallax blobs */}
       <motion.div
         style={{ y: blob1Y }}
         className="blob w-[520px] h-[520px] bg-brand-indigo/40 -top-24 -left-24 animate-blob-float"
       />
       <motion.div
         style={{ y: blob2Y }}
-        className="blob w-[460px] h-[460px] bg-brand-pink/40 top-10 right-[-6rem] animate-blob-float"
-      />
-      <motion.div
-        style={{ y: blob3Y }}
-        className="blob w-[400px] h-[400px] bg-accent-amber/30 bottom-[-6rem] left-1/3 animate-blob-float"
+        className="blob w-[440px] h-[440px] bg-brand-pink/40 top-10 right-[-6rem] animate-blob-float"
       />
 
       <motion.div
@@ -66,7 +80,7 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: EASE }}
           className="eyebrow mb-7"
         >
-          Entrepreneur · Aspiring VC / PE Investor
+          Business &amp; Entrepreneurship · Northeastern
         </motion.p>
 
         <h1 className="display text-[13vw] sm:text-[11vw] md:text-[9vw] lg:text-[8.5rem] font-bold text-ink">
@@ -76,10 +90,34 @@ export default function Hero() {
           </MaskReveal>
         </h1>
 
+        {/* Rotating roles */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
+          className="mt-5 flex items-center gap-3 display text-2xl md:text-4xl text-ink"
+        >
+          <span className="text-brand-violet">{"//"}</span>
+          <span className="relative inline-flex h-[1.25em] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={ROLES[roleIndex]}
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                exit={{ y: "-110%", opacity: 0 }}
+                transition={{ duration: 0.5, ease: EASE }}
+                className="block gradient-brand font-bold"
+              >
+                {ROLES[roleIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
           className="mt-8 text-lg md:text-2xl text-ink-soft max-w-2xl leading-relaxed"
         >
           Business &amp; Entrepreneurship student at Northeastern. I&apos;ve
@@ -92,7 +130,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55, ease: EASE }}
+          transition={{ duration: 0.8, delay: 0.72, ease: EASE }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <Button asChild variant="brand" size="lg">
@@ -112,7 +150,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="mt-12 flex items-center gap-5"
         >
           {socials.map(({ icon: Icon, href, label }) => (

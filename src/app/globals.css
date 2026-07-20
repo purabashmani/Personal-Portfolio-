@@ -242,6 +242,16 @@ body {
   display: block;
 }
 
+/* Custom cursor: hide the native cursor when the custom one is active */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+.has-custom-cursor input,
+.has-custom-cursor textarea {
+  cursor: text !important;
+}
+
 /* Reduced motion: halt perpetual CSS loops and instant-scroll */
 @media (prefers-reduced-motion: reduce) {
   html {

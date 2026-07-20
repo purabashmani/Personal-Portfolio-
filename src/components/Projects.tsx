@@ -13,9 +13,14 @@ interface Venture {
   period: string;
   description: string;
   tags: string[];
-  gradient: string;
+  image: string; // placeholder — swap for a real screenshot later
   href?: string;
 }
+
+// Placeholder imagery (grayscale, then duotone-tinted in the brand palette so a
+// random photo still reads on-brand). Swap the seeds for real screenshots later.
+const img = (seed: string) =>
+  `https://picsum.photos/seed/${seed}/800/600?grayscale`;
 
 const ventures: Venture[] = [
   {
@@ -27,19 +32,19 @@ const ventures: Venture[] = [
     description:
       "An essay on how OpenAI and Anthropic are racing to differentiate in the AI platform wars, and what that battle signals for investors and founders.",
     tags: ["Writing", "AI", "Markets"],
-    gradient: "from-brand-indigo to-brand-violet",
+    image: img("aigoldrush-vc"),
     href: "https://tamarventures.substack.com/p/the-ai-gold-rush-what-openai-and",
   },
   {
     id: 2,
     title: "14-Week Multi-Asset Portfolio Simulation",
     role: "Investing Project",
-    context: "Multi-Asset Strategy",
+    context: "Semester-Long Simulation",
     period: "2026",
     description:
-      "Ran a 14-week multi-asset portfolio simulation, building allocations across equities, fixed income, and alternatives while tracking performance and risk.",
-    tags: ["Portfolio", "Asset Allocation", "Risk"],
-    gradient: "from-brand-violet to-brand-pink",
+      "A semester-long exercise that started each team with $100K and challenged us to grow it through high-conviction, research-backed decisions. Leveraging a range of financial instruments, my team compounded the portfolio to over $2.6B, then engineered an automated trading bot that generated $200K+ per week.",
+    tags: ["Portfolio Strategy", "Leverage", "Algo Trading"],
+    image: img("portfolio-sim-markets"),
   },
   {
     id: 3,
@@ -50,7 +55,7 @@ const ventures: Venture[] = [
     description:
       "A roommate-and-landlord expense-automation platform. Led product strategy, workflow design, and MVP testing across a cross-functional team.",
     tags: ["Product", "MVP", "Fintech"],
-    gradient: "from-brand-pink to-accent-coral",
+    image: img("tally-fintech-app"),
   },
   {
     id: 4,
@@ -61,7 +66,7 @@ const ventures: Venture[] = [
     description:
       "An app that streamlines access to verified local scholarships. Directed UI/UX, user research, and market outreach to maximize engagement.",
     tags: ["UI/UX", "User Research", "Access"],
-    gradient: "from-brand-blue to-brand-indigo",
+    image: img("scholarships-education"),
   },
   {
     id: 5,
@@ -72,7 +77,7 @@ const ventures: Venture[] = [
     description:
       "Founded and scaled a neighborhood snow-removal venture to 15+ clients, driving 40% client retention and $1,200+ in seasonal revenue through local marketing.",
     tags: ["Founder", "Operations", "Marketing"],
-    gradient: "from-accent-amber to-accent-crimson",
+    image: img("snow-winter-business"),
   },
 ];
 
@@ -80,12 +85,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-28 px-6 overflow-hidden">
-      <div className="blob w-[360px] h-[360px] bg-brand-pink/25 top-24 right-[-4rem]" />
-
+    <section id="projects" className="relative py-28 px-6">
       <div className="relative max-w-6xl mx-auto">
         <ScrollReveal>
-          <div className="rule-brand mb-8" />
+          <p className="eyebrow">03 · Projects</p>
+          <div className="rule-brand mt-4 mb-8" />
           <h2 className="display text-4xl md:text-5xl font-bold text-ink leading-[1.02] max-w-3xl">
             <MaskReveal>Things I&apos;ve made</MaskReveal>
             <MaskReveal delay={0.1} className="gradient-brand">
@@ -99,37 +103,40 @@ export default function Projects() {
             const isLink = Boolean(v.href);
             const Wrapper = isLink ? motion.a : motion.div;
             const linkProps = isLink
-              ? { href: v.href, target: "_blank", rel: "noopener noreferrer" }
+              ? {
+                  href: v.href,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  "data-cursor": "View",
+                }
               : {};
 
             return (
               <Wrapper
                 key={v.id}
                 {...linkProps}
-                initial={{ opacity: 0, y: 44, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: index * 0.1, ease: EASE }}
+                transition={{ duration: 0.7, delay: index * 0.08, ease: EASE }}
                 className="group card overflow-hidden flex flex-col"
               >
-                {/* Gradient header */}
-                <div
-                  className={`relative h-36 bg-gradient-to-br ${v.gradient} overflow-hidden`}
-                >
-                  <span className="absolute -bottom-5 left-5 display text-7xl font-bold text-white/25">
-                    {String(v.id).padStart(2, "0")}
-                  </span>
-                  <span className="absolute top-4 left-5 text-xs font-semibold uppercase tracking-widest text-white/90">
+                {/* Duotone image header */}
+                <div className="relative h-44 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={v.image}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-indigo/80 to-brand-pink/60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-75" />
+                  <span className="absolute top-4 left-4 text-xs font-semibold uppercase tracking-widest text-white/90">
                     {v.role}
                   </span>
-                  <ArrowUpRight
-                    size={26}
-                    className={`absolute top-4 right-4 text-white transition-opacity ${
-                      isLink
-                        ? "opacity-90"
-                        : "opacity-0 group-hover:opacity-100"
-                    }`}
-                  />
+                  <span className="absolute -bottom-4 right-3 display text-7xl font-bold text-white/25">
+                    {String(v.id).padStart(2, "0")}
+                  </span>
                 </div>
 
                 <div className="p-7 flex flex-col flex-grow">
@@ -137,18 +144,15 @@ export default function Projects() {
                     <h3 className="display text-2xl font-bold text-ink leading-tight">
                       {v.title}
                     </h3>
-                    <span className="text-xs text-ink-mute shrink-0">
-                      {v.period}
-                    </span>
                   </div>
                   <p className="text-xs text-brand-violet font-medium mt-1">
-                    {v.context}
+                    {v.context} · {v.period}
                   </p>
                   <p className="text-ink-soft text-sm leading-relaxed mt-4 flex-grow">
                     {v.description}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-2 mt-5 pt-4 border-t border-line">
+                  <div className="flex flex-wrap items-center gap-2 mt-6 pt-4 border-t border-line">
                     {v.tags.map((tag) => (
                       <span
                         key={tag}
@@ -159,7 +163,7 @@ export default function Projects() {
                     ))}
                     {isLink && (
                       <span className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-brand-violet">
-                        Read article
+                        View Project
                         <ArrowUpRight
                           size={13}
                           className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"

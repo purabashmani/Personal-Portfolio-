@@ -76,7 +76,8 @@ export default function Experience() {
 
       <div className="relative max-w-5xl mx-auto">
         <ScrollReveal>
-          <div className="rule-brand mb-8" />
+          <p className="eyebrow">02 · Experience</p>
+          <div className="rule-brand mt-4 mb-8" />
           <h2 className="display text-4xl md:text-5xl font-bold text-ink leading-[1.02] max-w-3xl">
             <MaskReveal>Inside the </MaskReveal>
             <MaskReveal delay={0.1} className="gradient-brand">

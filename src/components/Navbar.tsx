@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Leadership", href: "#leadership" },
-  { label: "Contact", href: "#contact" },
+  { num: "01", label: "About", href: "#about" },
+  { num: "02", label: "Experience", href: "#experience" },
+  { num: "03", label: "Projects", href: "#projects" },
+  { num: "04", label: "Leadership", href: "#leadership" },
+  { num: "05", label: "Contact", href: "#contact" },
 ];
 
 const RESUME = "/Purab_Ashmaniwala_Resume.pdf";
@@ -52,8 +52,11 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="link-underline text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="link-underline group text-sm font-medium text-ink-soft hover:text-ink transition-colors"
             >
+              <span className="mr-1 font-mono text-[0.65rem] text-brand-violet align-top">
+                {link.num}
+              </span>
               {link.label}
             </a>
           ))}

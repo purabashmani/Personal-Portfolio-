@@ -74,7 +74,8 @@ export default function Contact() {
 
       <div className="relative max-w-5xl mx-auto">
         <ScrollReveal>
-          <div className="rule-brand mb-8" />
+          <p className="eyebrow">05 · Contact</p>
+          <div className="rule-brand mt-4 mb-8" />
           <h2 className="display text-5xl md:text-6xl font-bold text-ink leading-[1.0] max-w-3xl">
             <MaskReveal>Let&apos;s build</MaskReveal>
             <MaskReveal delay={0.1} className="gradient-brand">

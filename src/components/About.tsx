@@ -40,7 +40,8 @@ export default function About() {
 
       <div className="relative max-w-6xl mx-auto">
         <ScrollReveal>
-          <div className="rule-brand mb-8" />
+          <p className="eyebrow">01 · About</p>
+          <div className="rule-brand mt-4 mb-8" />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
