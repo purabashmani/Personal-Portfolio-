@@ -44,7 +44,7 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed bottom-5 right-6 z-40 hidden items-center gap-3 select-none md:flex">
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 hidden items-center gap-3 select-none md:flex">
       <span className="text-[0.7rem] uppercase tracking-[0.2em] text-ink-mute">
         {active}
       </span>

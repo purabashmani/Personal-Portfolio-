@@ -32,7 +32,7 @@ const ventures: Venture[] = [
     description:
       "An essay on how OpenAI and Anthropic are racing to differentiate in the AI platform wars, and what that battle signals for investors and founders.",
     tags: ["Writing", "AI", "Markets"],
-    image: img("aigoldrush-vc"),
+    image: "/projects/ai-gold-rush.jpg",
     href: "https://tamarventures.substack.com/p/the-ai-gold-rush-what-openai-and",
   },
   {
@@ -66,7 +66,7 @@ const ventures: Venture[] = [
     description:
       "An app that streamlines access to verified local scholarships. Directed UI/UX, user research, and market outreach to maximize engagement.",
     tags: ["UI/UX", "User Research", "Access"],
-    image: img("scholarships-education"),
+    image: "/projects/scholarships.jpg",
   },
   {
     id: 5,
@@ -77,7 +77,7 @@ const ventures: Venture[] = [
     description:
       "Founded and scaled a neighborhood snow-removal venture to 15+ clients, driving 40% client retention and $1,200+ in seasonal revenue through local marketing.",
     tags: ["Founder", "Operations", "Marketing"],
-    image: img("snow-winter-business"),
+    image: "/projects/snow.jpg",
   },
 ];
 
@@ -128,6 +128,11 @@ export default function Projects() {
                     src={v.image}
                     alt=""
                     loading="lazy"
+                    onError={(e) => {
+                      const t = e.currentTarget;
+                      t.onerror = null;
+                      t.src = `https://picsum.photos/seed/proj${v.id}/800/600?grayscale`;
+                    }}
                     className="h-full w-full object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-indigo/80 to-brand-pink/60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-75" />

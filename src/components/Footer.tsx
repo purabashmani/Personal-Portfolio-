@@ -13,7 +13,7 @@ export default function Footer() {
               Purab <span className="gradient-brand">Ashmaniwala</span>
             </a>
             <p className="text-ink-mute text-sm mt-1">
-              Entrepreneur · Aspiring VC / PE Investor · Bay Area
+              Entrepreneur · Aspiring VC / Aspiring PE Investor · Boston
             </p>
           </div>
 

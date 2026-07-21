@@ -83,8 +83,10 @@ export default function Contact() {
             </MaskReveal>
           </h2>
           <p className="text-ink-soft mt-6 max-w-lg text-lg">
-            Recruiting for VC, PE, or investing roles, or just want to talk
-            startups? My inbox is open.
+            I&apos;m open to opportunities across venture capital, private
+            equity, and early-stage investing, and always interested in
+            connecting. Whether it&apos;s a role, a collaboration, or a
+            conversation, my inbox is open.
           </p>
         </ScrollReveal>
 

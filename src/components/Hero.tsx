@@ -1,172 +1,132 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
-import { Linkedin, Mail } from "lucide-react";
-import MaskReveal from "./MaskReveal";
-import MarketBackdrop from "./MarketBackdrop";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
-const socials = [
-  {
-    icon: Linkedin,
-    href: "https://www.linkedin.com/in/purab-ashmaniwala",
-    label: "LinkedIn",
-  },
-  { icon: Mail, href: "mailto:ashmaniwala.p@northeastern.edu", label: "Email" },
+// Portrait lives at public/portrait.jpg. Fallback keeps the hero clean until
+// the file is added.
+const PORTRAIT = "/portrait.jpg";
+const PORTRAIT_FALLBACK = "https://i.pravatar.cc/900?img=13";
+
+// Big circulating role words (russellnumo-style marquee rows)
+const ROWS: Array<{
+  text: string;
+  reverse: boolean;
+  gradient: boolean;
+  duration: string;
+}> = [
+  { text: "Entrepreneur", reverse: false, gradient: false, duration: "42s" },
+  { text: "Aspiring VC", reverse: true, gradient: true, duration: "55s" },
+  { text: "Aspiring PE Investor", reverse: false, gradient: false, duration: "48s" },
+  { text: "Founder", reverse: true, gradient: true, duration: "60s" },
 ];
 
-const ROLES = ["Entrepreneur", "Aspiring VC", "PE Investor", "Founder"];
-const EASE = [0.22, 1, 0.36, 1] as const;
+function MarqueeRow({
+  text,
+  reverse,
+  gradient,
+  duration,
+}: {
+  text: string;
+  reverse: boolean;
+  gradient: boolean;
+  duration: string;
+}) {
+  const chunk = Array(5).fill(text).join("    ") + "    ";
+  const cls = `display font-bold uppercase leading-[0.9] tracking-tight text-[16vw] md:text-[12vw] ${
+    gradient ? "gradient-brand" : "text-ink"
+  }`;
+  return (
+    <div className="flex w-full overflow-hidden">
+      <div
+        className={`flex shrink-0 whitespace-nowrap ${
+          reverse ? "animate-marquee-reverse" : "animate-marquee"
+        }`}
+        style={{ animationDuration: duration }}
+      >
+        <span className={cls}>{chunk}</span>
+        <span className={cls} aria-hidden="true">
+          {chunk}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function RowsLayer() {
+  return (
+    <div className="flex h-full w-full flex-col justify-center gap-[0.5vh]">
+      {ROWS.map((row) => (
+        <MarqueeRow key={row.text} {...row} />
+      ))}
+    </div>
+  );
+}
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const [clock, setClock] = useState("");
 
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 140]);
-  const contentOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.6],
-    [1, reduce ? 1 : 0]
-  );
-  const blob1Y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -220]);
-  const blob2Y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 180]);
-
-  // rotating role words
-  const [roleIndex, setRoleIndex] = useState(0);
   useEffect(() => {
-    const id = setInterval(
-      () => setRoleIndex((p) => (p + 1) % ROLES.length),
-      2200
-    );
+    const tick = () =>
+      setClock(
+        new Date().toLocaleTimeString("en-US", {
+          timeZone: "America/New_York",
+          hour12: false,
+        })
+      );
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden bg-canvas"
-    >
-      {/* Finance / markets motif */}
-      <MarketBackdrop />
+    <section className="relative min-h-[100dvh] overflow-hidden bg-canvas">
+      {/* Circulating role words (behind the portrait) */}
+      <div className="absolute inset-0 z-10">
+        <RowsLayer />
+      </div>
 
-      {/* Ambient parallax blobs */}
-      <motion.div
-        style={{ y: blob1Y }}
-        className="blob w-[520px] h-[520px] bg-brand-indigo/40 -top-24 -left-24 animate-blob-float"
-      />
-      <motion.div
-        style={{ y: blob2Y }}
-        className="blob w-[440px] h-[440px] bg-brand-pink/40 top-10 right-[-6rem] animate-blob-float"
-      />
+      {/* Centered portrait */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center">
+        <div className="relative w-[58vw] max-w-[300px] md:max-w-[400px] aspect-[3/4] overflow-hidden shadow-[0_30px_80px_-30px_rgba(34,16,41,0.5)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={PORTRAIT}
+            alt="Purab Ashmaniwala"
+            onError={(e) => {
+              const t = e.currentTarget;
+              t.onerror = null;
+              t.src = PORTRAIT_FALLBACK;
+            }}
+            className="h-full w-full object-cover grayscale contrast-[1.08]"
+            style={{ objectPosition: "50% 28%" }}
+          />
+          {/* duotone tint to match the palette */}
+          <div
+            className="pointer-events-none absolute inset-0 mix-blend-color opacity-70"
+            style={{ background: "linear-gradient(160deg,#7c3aed,#e11d48)" }}
+          />
+          <div className="pointer-events-none absolute inset-0 mix-blend-multiply opacity-20 bg-brand-violet" />
+        </div>
+      </div>
 
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-24"
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="eyebrow mb-7"
-        >
-          Business &amp; Entrepreneurship · Northeastern
-        </motion.p>
+      {/* SAME words re-drawn on top of the portrait, blended so they overlap
+          the photo without dominating it (keeps the portrait's integrity). */}
+      <div className="pointer-events-none absolute inset-0 z-30 mix-blend-overlay opacity-70">
+        <RowsLayer />
+      </div>
 
-        <h1 className="display text-[13vw] sm:text-[11vw] md:text-[9vw] lg:text-[8.5rem] font-bold text-ink">
-          <MaskReveal delay={0.05}>Purab</MaskReveal>
-          <MaskReveal delay={0.16} className="gradient-brand">
-            Ashmaniwala
-          </MaskReveal>
-        </h1>
-
-        {/* Rotating roles */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-          className="mt-5 flex items-center gap-3 display text-2xl md:text-4xl text-ink"
-        >
-          <span className="text-brand-violet">{"//"}</span>
-          <span className="relative inline-flex h-[1.25em] overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={ROLES[roleIndex]}
-                initial={{ y: "110%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                exit={{ y: "-110%", opacity: 0 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className="block gradient-brand font-bold"
-              >
-                {ROLES[roleIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
-          className="mt-8 text-lg md:text-2xl text-ink-soft max-w-2xl leading-relaxed"
-        >
-          Business &amp; Entrepreneurship student at Northeastern. I&apos;ve
-          founded ventures and worked inside{" "}
-          <span className="text-ink font-medium">venture capital</span> and
-          angel investing. Now I&apos;m building toward a career backing bold
-          founders.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.72, ease: EASE }}
-          className="mt-10 flex flex-wrap items-center gap-4"
-        >
-          <Button asChild variant="brand" size="lg">
-            <a href="#experience">See my track record</a>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <a
-              href="/Purab_Ashmaniwala_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Download résumé
-            </a>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-12 flex items-center gap-5"
-        >
-          {socials.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="text-ink-mute hover:text-brand-violet transition-colors"
-            >
-              <Icon size={22} />
-            </a>
-          ))}
-        </motion.div>
-      </motion.div>
+      {/* Corner labels */}
+      <div className="absolute bottom-6 left-6 z-40 text-[0.7rem] uppercase tracking-[0.2em] text-ink-mute">
+        Based in Boston{" "}
+        <span className="tabular-nums text-ink-soft">· {clock}</span>
+      </div>
+      <div className="absolute bottom-6 right-6 z-40 flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.2em] text-ink-mute">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        </span>
+        Open to opportunities
+      </div>
     </section>
   );
 }

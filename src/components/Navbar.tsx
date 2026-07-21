@@ -30,24 +30,24 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.7, ease: EASE }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: EASE }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
           ? "bg-canvas/70 backdrop-blur-xl border-b border-line"
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="w-full pl-5 pr-5 md:pl-8 md:pr-8 py-4 flex items-center justify-between gap-6">
         <a
           href="#"
-          className="display text-lg font-bold tracking-tight text-ink"
+          className="display text-base md:text-lg font-bold tracking-tight text-ink whitespace-nowrap leading-none"
         >
           Purab Ashmaniwala <span className="gradient-brand">Portfolio</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-7 xl:gap-9">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -71,7 +71,7 @@ export default function Navbar() {
         <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
           <Dialog.Trigger asChild>
             <button
-              className="md:hidden text-ink rounded-md p-1 transition-transform active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="lg:hidden text-ink rounded-md p-1 transition-transform active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Open menu"
             >
               <Menu size={24} />
