@@ -35,3 +35,6 @@ next-env.d.ts
 
 # MCP local config (contains API keys)
 .mcp.json
+
+# separate older portfolio project bundled alongside (not part of this repo)
+/portfolio
