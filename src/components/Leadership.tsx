@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Users, Video, HeartHandshake } from "lucide-react";
+import { Users, Video, HeartHandshake, ArrowUpRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import MaskReveal from "./MaskReveal";
 
@@ -13,6 +13,7 @@ interface Item {
   period: string;
   description: string;
   highlight: string;
+  links?: { label: string; href: string }[];
 }
 
 const items: Item[] = [
@@ -25,6 +26,10 @@ const items: Item[] = [
     description:
       "Produce short-form educational videos on personal finance and economics, using audience analytics and storytelling to make complex concepts click for students.",
     highlight: "5K+ Views",
+    links: [
+      { label: "TikTok", href: "https://www.tiktok.com/@simple__economics" },
+      { label: "Instagram", href: "https://www.instagram.com/simple___economics" },
+    ],
   },
   {
     id: 2,
@@ -113,6 +118,27 @@ function Panel({ item, active, onEnter }: { item: Item; active: boolean; onEnter
           <span className="mt-6 inline-flex rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-semibold tracking-wide backdrop-blur-sm">
             {item.highlight}
           </span>
+          {item.links && (
+            <div
+              className={`mt-4 flex flex-wrap gap-2 ${
+                active ? "pointer-events-auto" : ""
+              }`}
+            >
+              {item.links.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="Watch"
+                  className="inline-flex items-center gap-1 rounded-full bg-white/20 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/30"
+                >
+                  {l.label}
+                  <ArrowUpRight size={12} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -183,6 +209,22 @@ export default function Leadership() {
                 <span className="mt-4 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
                   {item.highlight}
                 </span>
+                {item.links && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.links.map((l) => (
+                      <a
+                        key={l.label}
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white hover:bg-white/30"
+                      >
+                        {l.label}
+                        <ArrowUpRight size={12} />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}

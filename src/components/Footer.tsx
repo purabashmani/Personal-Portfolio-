@@ -3,63 +3,93 @@
 import { ArrowUp, Linkedin, Mail, Instagram } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
+// lucide has no TikTok / Substack brand icons, so use small inline SVGs.
+function TikTokIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.6-2.6c.27 0 .53.04.77.12V9.78a5.7 5.7 0 1 0 4.9 5.64V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48z" />
+    </svg>
+  );
+}
+
+function SubstackIcon({ size = 20, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+    </svg>
+  );
+}
+
+const socials = [
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/purab-ashmaniwala",
+    label: "LinkedIn",
+  },
+  {
+    icon: Mail,
+    href: "mailto:purab.ashmani@gmail.com",
+    label: "Email",
+  },
+  {
+    icon: SubstackIcon,
+    href: "https://tamarventures.substack.com/p/the-ai-gold-rush-what-openai-and",
+    label: "Substack",
+  },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/simple___economics",
+    label: "Instagram",
+  },
+  {
+    icon: TikTokIcon,
+    href: "https://www.tiktok.com/@simple__economics",
+    label: "TikTok",
+  },
+];
+
 export default function Footer() {
   return (
-    <footer className="relative border-t border-line py-14 px-6 bg-canvas">
+    <footer className="relative border-t border-line bg-canvas px-6 py-14">
       <ScrollReveal>
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
             <a href="#" className="display text-2xl font-bold text-ink">
               Purab <span className="gradient-brand">Ashmaniwala</span>
             </a>
-            <p className="text-ink-mute text-sm mt-1">
+            <p className="mt-1 text-sm text-ink-mute">
               Entrepreneur · Aspiring VC / Aspiring PE Investor · Boston
             </p>
           </div>
 
           <div className="flex items-center gap-5">
-            {[
-              {
-                icon: Linkedin,
-                href: "https://www.linkedin.com/in/purab-ashmaniwala",
-                label: "LinkedIn",
-              },
-              {
-                icon: Mail,
-                href: "mailto:ashmaniwala.p@northeastern.edu",
-                label: "Email",
-              },
-              {
-                icon: Instagram,
-                href: "https://instagram.com",
-                label: "Instagram",
-              },
-            ].map(({ icon: Icon, href, label }) => (
+            {socials.map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="text-ink-mute hover:text-brand-violet transition-colors"
+                data-cursor={label}
+                className="text-ink-mute transition-colors hover:text-brand-violet"
               >
                 <Icon size={20} />
               </a>
             ))}
           </div>
 
-          <div className="flex flex-col items-center md:items-end gap-2">
+          <div className="flex flex-col items-center gap-2 md:items-end">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center gap-1 text-sm text-ink-mute hover:text-ink transition-colors group"
+              className="group flex items-center gap-1 text-sm text-ink-mute transition-colors hover:text-ink"
             >
               Back to top
               <ArrowUp
                 size={14}
-                className="group-hover:-translate-y-0.5 transition-transform"
+                className="transition-transform group-hover:-translate-y-0.5"
               />
             </button>
-            <p className="text-ink-mute text-xs">
+            <p className="text-xs text-ink-mute">
               &copy; {new Date().getFullYear()} Purab Ashmaniwala
             </p>
           </div>
