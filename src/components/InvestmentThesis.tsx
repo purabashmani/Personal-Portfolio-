@@ -46,12 +46,12 @@ const criteria = [
 
 export default function InvestmentThesis() {
   return (
-    <section id="thesis" className="relative overflow-hidden px-6 py-28">
+    <section id="thesis" className="relative overflow-hidden border-y border-line bg-canvas-alt px-6 py-28">
       <div className="blob right-[-4rem] top-16 h-[380px] w-[380px] bg-brand-violet/15" />
 
       <div className="relative mx-auto max-w-5xl">
         <ScrollReveal>
-          <p className="eyebrow">05 · Investment Thesis</p>
+          <p className="eyebrow">04 · Investment Thesis</p>
           <div className="rule-brand mb-8 mt-4" />
           <h2 className="display max-w-3xl text-4xl font-bold leading-[1.02] text-ink md:text-5xl">
             <MaskReveal>Where I&apos;d place</MaskReveal>

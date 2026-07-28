@@ -10,11 +10,10 @@ const navLinks = [
   { num: "01", label: "About", href: "#about" },
   { num: "02", label: "Experience", href: "#experience" },
   { num: "03", label: "Projects", href: "#projects" },
-  { num: "04", label: "Writing", href: "#writing" },
-  { num: "05", label: "Investing", href: "#thesis" },
-  { num: "06", label: "Leadership", href: "#leadership" },
-  { num: "07", label: "Recommendations", href: "#recommendations" },
-  { num: "08", label: "Contact", href: "#contact" },
+  { num: "04", label: "Investing", href: "#thesis" },
+  { num: "05", label: "Leadership", href: "#leadership" },
+  { num: "06", label: "Recommendations", href: "#recommendations" },
+  { num: "07", label: "Contact", href: "#contact" },
 ];
 
 const RESUME = "/Purab_Ashmaniwala_Resume.pdf";
