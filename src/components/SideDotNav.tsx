@@ -8,7 +8,7 @@ const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "projects", label: "Projects" },
   { id: "thesis", label: "Investing" },
   { id: "leadership", label: "Leadership" },
-  { id: "recommendations", label: "Recs" },
+  { id: "recommendations", label: "Recommendations" },
   { id: "contact", label: "Contact" },
 ];
 
