@@ -16,10 +16,28 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const SITE_URL = "https://purabashmaniwala.com"; // TODO: update to real domain at deploy
+const TITLE = "Purab Ashmaniwala | Entrepreneur & Aspiring Investor";
+const DESCRIPTION =
+  "Purab Ashmaniwala is an entrepreneur and Business Administration student at Northeastern (Finance & Entrepreneurship), focused on venture capital, private equity, and early-stage investing.";
+
 export const metadata: Metadata = {
-  title: "Purab Ashmaniwala | Entrepreneur & Aspiring Investor",
-  description:
-    "Purab Ashmaniwala is an entrepreneur and Business Administration student at Northeastern (Finance & Entrepreneurship), focused on venture capital, private equity, and early-stage investing.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Purab Ashmaniwala",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

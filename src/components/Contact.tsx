@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,10 +62,16 @@ export default function Contact() {
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
+  const [sent, setSent] = useState(false);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Placeholder - wire up to Formspree / Resend / your backend.
-    alert(`Thanks, ${values.name}! This form is a placeholder for now.`);
+    // Open the visitor's email client, pre-addressed and pre-filled.
+    const subject = `Portfolio inquiry from ${values.name}`;
+    const body = `${values.message}\n\nFrom: ${values.name} (${values.email})`;
+    window.location.href = `mailto:purab.ashmani@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    setSent(true);
     form.reset();
   }
 
@@ -201,6 +208,18 @@ export default function Contact() {
                   Send Message
                   <Send size={16} />
                 </Button>
+                {sent && (
+                  <p className="text-center text-sm text-brand-violet">
+                    Your email app should have opened. If not, reach me at{" "}
+                    <a
+                      href="mailto:purab.ashmani@gmail.com"
+                      className="font-semibold underline"
+                    >
+                      purab.ashmani@gmail.com
+                    </a>
+                    .
+                  </p>
+                )}
               </form>
             </Form>
           </motion.div>
