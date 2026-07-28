@@ -3,6 +3,7 @@
 import { MapPin } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import MaskReveal from "./MaskReveal";
+import FocusMap from "./FocusMap";
 
 const facts = [
   { label: "University", value: "Northeastern University" },
@@ -12,18 +13,6 @@ const facts = [
   { label: "Class of", value: "2029" },
   { label: "Based", value: "Boston / East Coast" },
   { label: "Honors", value: "Dean's List, Fall 2025" },
-];
-
-const focus = [
-  "Venture Capital",
-  "Private Equity",
-  "Deal Screening",
-  "Due Diligence",
-  "Market & Competitive Research",
-  "Ecosystem Mapping",
-  "Deal Flow / CRM",
-  "Go-To-Market",
-  "Product & MVP",
 ];
 
 const languages = [
@@ -84,22 +73,6 @@ export default function About() {
               </div>
             </ScrollReveal>
 
-            {/* Focus areas */}
-            <ScrollReveal delay={0.2}>
-              <div className="mt-10">
-                <p className="eyebrow mb-4">Focus areas</p>
-                <div className="flex flex-wrap gap-2.5">
-                  {focus.map((f) => (
-                    <span
-                      key={f}
-                      className="chip px-3.5 py-1.5 text-sm text-ink-soft"
-                    >
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
 
           {/* Sidebar */}
@@ -139,6 +112,14 @@ export default function About() {
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Focus areas - interactive constellation */}
+        <ScrollReveal delay={0.1}>
+          <div className="mt-16 border-t border-line pt-14">
+            <p className="eyebrow mb-8 md:text-center">Focus areas</p>
+            <FocusMap />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

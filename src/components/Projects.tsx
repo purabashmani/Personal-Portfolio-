@@ -37,7 +37,7 @@ const ventures: Venture[] = [
     context: "Tamar Ventures · Substack",
     period: "2026",
     description:
-      "An essay on how OpenAI and Anthropic are racing to differentiate in the AI platform wars — and what that battle signals for the investors and founders trying to place their bets early.",
+      "An essay on how OpenAI and Anthropic are racing to differentiate in the AI platform wars, and what that battle signals for the investors and founders trying to place their bets early.",
     tags: ["Writing", "AI", "Markets"],
     stats: [
       { kind: "text", text: "Substack", label: "Platform" },
@@ -53,7 +53,7 @@ const ventures: Venture[] = [
     context: "14-Week Simulation",
     period: "2026",
     description:
-      "A semester-long exercise that started each team with $100K and challenged us to grow it through high-conviction, research-backed decisions. Leveraging a range of financial instruments, my team compounded the portfolio past $2.6B — then engineered an automated trading bot that generated $200K+ per week.",
+      "A semester-long exercise that started each team with $100K and challenged us to grow it through high-conviction, research-backed decisions. Leveraging a range of financial instruments, my team compounded the portfolio past $2.6B, then engineered an automated trading bot that generated $200K+ per week.",
     tags: ["Portfolio Strategy", "Leverage", "Algo Trading"],
     stats: [
       { kind: "num", value: 100, prefix: "$", suffix: "K", label: "Starting Capital" },
@@ -96,9 +96,9 @@ const ventures: Venture[] = [
     title: "Snow Removal Venture",
     role: "Founder",
     context: "South Windsor, CT",
-    period: "2020 – 2024",
+    period: "2020 - 2024",
     description:
-      "Founded and scaled a neighborhood snow-removal venture through local marketing and reliable operations — my first taste of building something from zero.",
+      "Founded and scaled a neighborhood snow-removal venture through local marketing and reliable operations. It was my first taste of building something from zero.",
     tags: ["Founder", "Operations", "Marketing"],
     stats: [
       { kind: "num", value: 15, suffix: "+", label: "Clients" },
@@ -109,7 +109,7 @@ const ventures: Venture[] = [
 ];
 
 // Count up to `target` with an ease-out. Defaults to the real value (so it's
-// always correct even if the animation can't run — reduced motion, background
+// always correct even if the animation can't run: reduced motion, background
 // tab, no JS); when `active` turns true and frames are available, it restarts
 // from 0 and counts up. The first rAF frame sets the 0 baseline, so a paused
 // tab simply keeps showing the true number.
@@ -303,7 +303,7 @@ function LedgerRow({
 
 export default function Projects() {
   // Open the showstopper (the $2.6B simulation) by default; one row at a time.
-  const [openId, setOpenId] = useState<number | null>(2);
+  const [openId, setOpenId] = useState<number | null>(null);
 
   return (
     <section id="projects" className="relative py-28 px-6">

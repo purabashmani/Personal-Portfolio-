@@ -67,7 +67,7 @@ export default function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile menu — Radix Dialog (a11y) + Motion springs (Apple feel) */}
+        {/* Mobile menu - Radix Dialog (a11y) + Motion springs (Apple feel) */}
         <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
           <Dialog.Trigger asChild>
             <button

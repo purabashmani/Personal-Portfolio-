@@ -154,7 +154,7 @@ export default function Experience() {
                 role="tabpanel"
                 className="relative h-full overflow-hidden rounded-2xl border border-line bg-white p-7 duration-500 animate-in fade-in-0 slide-in-from-right-4 md:p-9"
               >
-                {/* oversized watermark index — fills the panel's dead space */}
+                {/* oversized watermark index - fills the panel's dead space */}
                 <span className="display pointer-events-none absolute right-[-1.5rem] top-1/2 -translate-y-1/2 select-none text-[16rem] font-bold leading-none text-brand-violet/[0.06]">
                   {String(active.id).padStart(2, "0")}
                 </span>

@@ -63,7 +63,7 @@ export default function Contact() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Placeholder — wire up to Formspree / Resend / your backend.
+    // Placeholder - wire up to Formspree / Resend / your backend.
     alert(`Thanks, ${values.name}! This form is a placeholder for now.`);
     form.reset();
   }
