@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, Linkedin, Mail, Instagram } from "lucide-react";
+import { Linkedin, Mail, Instagram } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 // lucide has no TikTok / Substack brand icons, so use small inline SVGs.
@@ -78,21 +78,9 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="flex flex-col items-center gap-2 md:items-end">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group flex items-center gap-1 text-sm text-ink-mute transition-colors hover:text-ink"
-            >
-              Back to top
-              <ArrowUp
-                size={14}
-                className="transition-transform group-hover:-translate-y-0.5"
-              />
-            </button>
-            <p className="text-xs text-ink-mute">
-              &copy; {new Date().getFullYear()} Purab Ashmaniwala
-            </p>
-          </div>
+          <p className="text-xs text-ink-mute">
+            &copy; {new Date().getFullYear()} Purab Ashmaniwala
+          </p>
         </div>
       </ScrollReveal>
     </footer>

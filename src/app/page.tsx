@@ -13,6 +13,7 @@ import InvestmentThesis from "@/components/InvestmentThesis";
 import Leadership from "@/components/Leadership";
 import Recommendations from "@/components/Recommendations";
 import Contact from "@/components/Contact";
+import BackToTop from "@/components/BackToTop";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -33,6 +34,7 @@ export default function Home() {
       <Leadership />
       <Recommendations />
       <Contact />
+      <BackToTop />
       <Footer />
     </main>
   );
