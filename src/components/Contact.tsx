@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -55,8 +54,6 @@ const formSchema = z.object({
     .min(10, { message: "Your message should be at least 10 characters." }),
 });
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 export default function Contact() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -76,154 +73,158 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-28 px-6 overflow-hidden bg-canvas-alt border-y border-line">
-      <div className="blob w-[440px] h-[440px] bg-brand-violet/20 top-0 right-1/4" />
+    <section
+      id="contact"
+      className="relative overflow-hidden border-y border-line bg-canvas-alt px-6 py-28"
+    >
+      <div className="blob right-1/4 top-0 h-[440px] w-[440px] bg-brand-violet/20" />
 
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>
           <p className="eyebrow">07 · Contact</p>
-          <div className="rule-brand mt-4 mb-8" />
-          <h2 className="display text-5xl md:text-6xl font-bold text-ink leading-[1.0] max-w-3xl">
-            <MaskReveal>Let&apos;s build</MaskReveal>
-            <MaskReveal delay={0.1} className="gradient-brand">
-              something.
-            </MaskReveal>
-          </h2>
-          <p className="text-ink-soft mt-6 max-w-lg text-lg">
-            I&apos;m open to opportunities across venture capital, private
-            equity, and early-stage investing, and always interested in
-            connecting. Whether it&apos;s a role, a collaboration, or a
-            conversation, my inbox is open.
-          </p>
+          <div className="rule-brand mb-8 mt-4" />
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mt-14">
-          {/* Details */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.75, ease: EASE }}
-            className="lg:col-span-2 space-y-5"
-          >
-            {details.map(({ icon: Icon, label, value, href }) => {
-              const inner = (
-                <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-indigo to-brand-pink flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-white" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-ink-mute">
-                      {label}
-                    </p>
-                    <p className="text-sm font-medium text-ink break-words">
-                      {value}
-                    </p>
-                  </div>
-                </div>
-              );
-              return href ? (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  className="block group hover:opacity-80 transition-opacity"
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div key={label}>{inner}</div>
-              );
-            })}
-          </motion.div>
+        <ScrollReveal delay={0.1}>
+          <div className="grid overflow-hidden rounded-3xl border border-line bg-white shadow-[0_40px_90px_-40px_rgba(147,51,234,0.4)] lg:grid-cols-2">
+            {/* Left: gradient panel with the pitch + contact links */}
+            <div className="relative flex flex-col justify-between gap-10 bg-gradient-to-br from-brand-indigo via-brand-violet to-brand-pink p-9 text-white md:p-11">
+              <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
 
-          {/* Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
-            className="lg:col-span-3 card p-8"
-          >
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-5"
-                noValidate
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="your.email@example.com"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={5}
-                          placeholder="Your message..."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button
-                  type="submit"
-                  variant="brand"
-                  size="lg"
-                  className="w-full"
-                >
-                  Send Message
-                  <Send size={16} />
-                </Button>
-                {sent && (
-                  <p className="text-center text-sm text-brand-violet">
-                    Your email app should have opened. If not, reach me at{" "}
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                  </span>
+                  Open to opportunities
+                </span>
+
+                <h2 className="display mt-6 text-4xl font-bold leading-[1.0] md:text-5xl">
+                  <MaskReveal>Let&apos;s build</MaskReveal>
+                  <MaskReveal delay={0.1}>something.</MaskReveal>
+                </h2>
+
+                <p className="mt-5 max-w-sm text-white/85">
+                  Open to opportunities across venture capital, private equity,
+                  and early-stage investing. Whether it&apos;s a role, a
+                  collaboration, or a conversation, my inbox is open.
+                </p>
+              </div>
+
+              <div className="relative space-y-1.5">
+                {details.map(({ icon: Icon, label, value, href }) => {
+                  const inner = (
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white/15">
+                        <Icon size={16} className="text-white" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[0.6rem] uppercase tracking-[0.18em] text-white/60">
+                          {label}
+                        </p>
+                        <p className="break-words text-sm font-medium text-white">
+                          {value}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                  return href ? (
                     <a
-                      href="mailto:purab.ashmani@gmail.com"
-                      className="font-semibold underline"
+                      key={label}
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      data-cursor={href.startsWith("http") ? "Visit" : "Email"}
+                      className="-mx-2 block rounded-xl px-2 py-1.5 transition-colors hover:bg-white/10"
                     >
-                      purab.ashmani@gmail.com
+                      {inner}
                     </a>
-                    .
-                  </p>
-                )}
-              </form>
-            </Form>
-          </motion.div>
-        </div>
+                  ) : (
+                    <div key={label} className="px-0 py-1.5">
+                      {inner}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right: the form */}
+            <div className="p-9 md:p-11">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-5"
+                  noValidate
+                >
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="your.email@example.com"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            rows={5}
+                            placeholder="Your message..."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" variant="brand" size="lg" className="w-full">
+                    Send Message
+                    <Send size={16} />
+                  </Button>
+                  {sent && (
+                    <p className="text-center text-sm text-brand-violet">
+                      Your email app should have opened. If not, reach me at{" "}
+                      <a
+                        href="mailto:purab.ashmani@gmail.com"
+                        className="font-semibold underline"
+                      >
+                        purab.ashmani@gmail.com
+                      </a>
+                      .
+                    </p>
+                  )}
+                </form>
+              </Form>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
