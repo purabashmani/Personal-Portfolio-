@@ -8,6 +8,7 @@ import About from "@/components/About";
 import StatsBand from "@/components/StatsBand";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Writing from "@/components/Writing";
 import Leadership from "@/components/Leadership";
 import Recommendations from "@/components/Recommendations";
 import Contact from "@/components/Contact";
@@ -26,6 +27,7 @@ export default function Home() {
       <StatsBand />
       <Experience />
       <Projects />
+      <Writing />
       <Leadership />
       <Recommendations />
       <Contact />

@@ -131,7 +131,7 @@ export default function Leadership() {
 
       <div className="relative mx-auto max-w-5xl">
         <ScrollReveal>
-          <p className="eyebrow">04 · Leadership</p>
+          <p className="eyebrow">05 · Leadership</p>
           <div className="rule-brand mb-8 mt-4" />
           <h2 className="display max-w-3xl text-4xl font-bold leading-[1.02] text-ink md:text-5xl">
             <MaskReveal>Building </MaskReveal>
