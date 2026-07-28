@@ -11,7 +11,8 @@ const navLinks = [
   { num: "02", label: "Experience", href: "#experience" },
   { num: "03", label: "Projects", href: "#projects" },
   { num: "04", label: "Leadership", href: "#leadership" },
-  { num: "05", label: "Contact", href: "#contact" },
+  { num: "05", label: "Recommendations", href: "#recommendations" },
+  { num: "06", label: "Contact", href: "#contact" },
 ];
 
 const RESUME = "/Purab_Ashmaniwala_Resume.pdf";

@@ -8,7 +8,8 @@ const SECTIONS: Array<[string, string]> = [
   ["experience", "02 · Experience"],
   ["projects", "03 · Projects"],
   ["leadership", "04 · Leadership"],
-  ["contact", "05 · Contact"],
+  ["recommendations", "05 · Recommendations"],
+  ["contact", "06 · Contact"],
 ];
 
 /**

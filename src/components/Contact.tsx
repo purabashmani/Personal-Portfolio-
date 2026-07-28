@@ -69,12 +69,12 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-28 px-6 overflow-hidden">
+    <section id="contact" className="relative py-28 px-6 overflow-hidden bg-canvas-alt border-y border-line">
       <div className="blob w-[440px] h-[440px] bg-brand-violet/20 top-0 right-1/4" />
 
       <div className="relative max-w-5xl mx-auto">
         <ScrollReveal>
-          <p className="eyebrow">05 · Contact</p>
+          <p className="eyebrow">06 · Contact</p>
           <div className="rule-brand mt-4 mb-8" />
           <h2 className="display text-5xl md:text-6xl font-bold text-ink leading-[1.0] max-w-3xl">
             <MaskReveal>Let&apos;s build</MaskReveal>
