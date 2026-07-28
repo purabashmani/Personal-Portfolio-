@@ -16,7 +16,7 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const SITE_URL = "https://purabashmaniwala.com"; // TODO: update to real domain at deploy
+const SITE_URL = "https://personal-portfolio-wfum.vercel.app"; // update if a custom domain is added later
 const TITLE = "Purab Ashmaniwala | Entrepreneur & Aspiring Investor";
 const DESCRIPTION =
   "Purab Ashmaniwala is an entrepreneur and Business Administration student at Northeastern (Finance & Entrepreneurship), focused on venture capital, private equity, and early-stage investing.";
