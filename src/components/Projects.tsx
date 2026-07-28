@@ -32,22 +32,6 @@ interface Venture {
 const ventures: Venture[] = [
   {
     id: 1,
-    title: "The AI Gold Rush",
-    role: "Published Article",
-    context: "Tamar Ventures · Substack",
-    period: "2026",
-    description:
-      "An essay on how OpenAI and Anthropic are racing to differentiate in the AI platform wars, and what that battle signals for the investors and founders trying to place their bets early.",
-    tags: ["Writing", "AI", "Markets"],
-    stats: [
-      { kind: "text", text: "Substack", label: "Platform" },
-      { kind: "text", text: "Tamar Ventures", label: "Featured in" },
-      { kind: "text", text: "2026", label: "Year" },
-    ],
-    href: "https://tamarventures.substack.com/p/the-ai-gold-rush-what-openai-and",
-  },
-  {
-    id: 2,
     title: "Multi-Asset Portfolio Simulation",
     role: "Investing Project",
     context: "14-Week Simulation",
@@ -62,7 +46,7 @@ const ventures: Venture[] = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     title: "Tally",
     role: "Startup Lead",
     context: "Innovation Course · Northeastern",
@@ -77,7 +61,7 @@ const ventures: Venture[] = [
     ],
   },
   {
-    id: 4,
+    id: 3,
     title: "Scholarships Platform",
     role: "Startup Lead",
     context: "Design Thinking · Northeastern",
@@ -92,7 +76,7 @@ const ventures: Venture[] = [
     ],
   },
   {
-    id: 5,
+    id: 4,
     title: "Snow Removal Venture",
     role: "Founder",
     context: "South Windsor, CT",
