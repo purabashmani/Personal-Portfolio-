@@ -1,12 +1,14 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import MaskReveal from "./MaskReveal";
 
+type Item = { title: string; desc: string };
+
 // STARTER DRAFT — inferred from Purab's AI Gold Rush essay + VC/PE focus.
-// Meant to be rewritten to his real convictions before publishing.
-const themes = [
+// Replace the wording with your real convictions before publishing.
+const sectors: Item[] = [
   {
     title: "AI platforms & applications",
     desc: "As frontier models commoditize, durable value accrues to the layers with proprietary data, distribution, and deep workflow lock-in.",
@@ -25,7 +27,7 @@ const themes = [
   },
 ];
 
-const criteria = [
+const beliefs: Item[] = [
   {
     title: "A non-obvious insight",
     desc: "Founders who see something about the market that others don't yet.",
@@ -44,12 +46,67 @@ const criteria = [
   },
 ];
 
+function Column({ eyebrow, items }: { eyebrow: string; items: Item[] }) {
+  const [active, setActive] = useState<number | null>(null);
+  return (
+    <div>
+      <p className="eyebrow mb-6">{eyebrow}</p>
+      <div className="space-y-3" onMouseLeave={() => setActive(null)}>
+        {items.map((it, i) => {
+          const isActive = active === i;
+          const dim = active !== null && !isActive;
+          return (
+            <div
+              key={it.title}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              tabIndex={0}
+              className={`relative overflow-hidden rounded-2xl border p-5 outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-brand-violet ${
+                isActive
+                  ? "-translate-y-0.5 border-brand-violet/40 bg-white shadow-[0_20px_50px_-24px_rgba(147,51,234,0.45)]"
+                  : "border-line bg-white/50"
+              } ${dim ? "opacity-50" : "opacity-100"}`}
+            >
+              {/* gradient accent bar that grows when active */}
+              <span
+                className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-brand-violet to-accent-crimson transition-transform duration-300 ${
+                  isActive ? "scale-y-100" : "scale-y-0"
+                }`}
+              />
+              <div className="flex items-start gap-4">
+                <span
+                  className={`display shrink-0 text-xl font-bold tabular-nums transition-colors ${
+                    isActive ? "gradient-brand" : "text-ink-mute"
+                  }`}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="display text-lg font-bold leading-snug text-ink">
+                    {it.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                    {it.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function InvestmentThesis() {
   return (
-    <section id="thesis" className="relative overflow-hidden border-y border-line bg-canvas-alt px-6 py-28">
+    <section
+      id="thesis"
+      className="relative overflow-hidden border-y border-line bg-canvas-alt px-6 py-28"
+    >
       <div className="blob right-[-4rem] top-16 h-[380px] w-[380px] bg-brand-violet/15" />
 
-      <div className="relative mx-auto max-w-5xl">
+      <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>
           <p className="eyebrow">04 · Investment Thesis</p>
           <div className="rule-brand mb-8 mt-4" />
@@ -60,55 +117,20 @@ export default function InvestmentThesis() {
             </MaskReveal>
           </h2>
           <p className="mt-6 max-w-lg text-lg text-ink-soft">
-            A working thesis on where I think value gets created, and what makes
-            me lean in. Opinionated on purpose, and always evolving.
+            The sectors I&apos;m most drawn to, and the principles I use to judge
+            what&apos;s worth backing. Opinionated on purpose, and always
+            evolving.
           </p>
         </ScrollReveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* Themes */}
-          <ScrollReveal delay={0.1}>
-            <p className="eyebrow mb-6">Themes I&apos;m drawn to</p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {themes.map((t, i) => (
-                <div
-                  key={t.title}
-                  className="group rounded-2xl border border-line bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-violet/40 hover:shadow-[0_20px_50px_-24px_rgba(147,51,234,0.4)]"
-                >
-                  <span className="display gradient-brand text-2xl font-bold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="display mt-3 text-lg font-bold leading-snug text-ink">
-                    {t.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                    {t.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* Criteria */}
-          <ScrollReveal delay={0.15} direction="left">
-            <p className="eyebrow mb-6">What makes me lean in</p>
-            <div className="space-y-5">
-              {criteria.map((c) => (
-                <div key={c.title} className="flex gap-4">
-                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-indigo to-brand-pink text-white">
-                    <Sparkles size={16} />
-                  </span>
-                  <div>
-                    <h3 className="display font-bold text-ink">{c.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      {c.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
+        <ScrollReveal delay={0.1}>
+          <div className="relative mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            {/* center divider (desktop) */}
+            <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-line to-transparent lg:block" />
+            <Column eyebrow="Sectors I back" items={sectors} />
+            <Column eyebrow="What I believe" items={beliefs} />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
