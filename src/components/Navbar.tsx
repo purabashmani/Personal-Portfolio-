@@ -61,10 +61,11 @@ export default function Navbar() {
           <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
             <Dialog.Trigger asChild>
               <button
-                className="rounded-md p-1 text-ink transition-transform active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
+                className="flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:border-brand-violet/40 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Open menu"
               >
-                <Menu size={24} />
+                <Menu size={16} />
+                <span className="hidden sm:inline">Menu</span>
               </button>
             </Dialog.Trigger>
 
@@ -102,13 +103,16 @@ export default function Navbar() {
                     >
                       <Dialog.Title className="sr-only">Menu</Dialog.Title>
                       <nav className="flex flex-col gap-1">
-                        {navLinks.map((link) => (
+                        {navLinks.map((link, i) => (
                           <a
                             key={link.href}
                             href={link.href}
                             onClick={() => setMenuOpen(false)}
-                            className="py-2 text-base font-medium text-ink-soft transition-colors hover:text-ink"
+                            className="flex items-baseline gap-3 py-2 text-base font-medium text-ink-soft transition-colors hover:text-ink"
                           >
+                            <span className="font-mono text-[0.7rem] text-brand-violet">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
                             {link.label}
                           </a>
                         ))}
