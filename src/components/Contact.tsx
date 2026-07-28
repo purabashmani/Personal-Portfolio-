@@ -81,7 +81,7 @@ export default function Contact() {
 
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>
-          <p className="eyebrow">07 · Contact</p>
+          <p className="eyebrow">06 · Contact</p>
           <div className="rule-brand mb-8 mt-4" />
         </ScrollReveal>
 
