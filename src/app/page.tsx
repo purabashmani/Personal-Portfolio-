@@ -2,6 +2,7 @@ import IntroLoader from "@/components/IntroLoader";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
+import SideDotNav from "@/components/SideDotNav";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import About from "@/components/About";
@@ -21,6 +22,7 @@ export default function Home() {
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
+      <SideDotNav />
       <Hero />
       <Marquee />
       <About />
