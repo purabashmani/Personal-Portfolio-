@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Button asChild variant="brand" size="sm">
             <a href={RESUME} target="_blank" rel="noopener noreferrer">
-              Résumé
+              Resumé
             </a>
           </Button>
 
